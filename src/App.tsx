@@ -1,19 +1,24 @@
-import LoginPage from "./components/Login";
-import HomePage from "./components/HomePage";
-import NotFoundPage from "./components/NotFoundPage";
+import React from "react";
+import {
+  BrowserRouter,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
+import LoginPage from "./LoginPage";
+import HomePage from "./HomePage";
 
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 
-function App() {
+const App: React.FC = () => {
   return (
-    <Router>
+    <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route path="/login" component={LoginPage} />
-        <Route component={NotFoundPage} />
+        <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/home" component={HomePage} />
+        <Redirect from="/" to="/login" />
       </Switch>
-    </Router>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
