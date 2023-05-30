@@ -5,8 +5,9 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import LoginPage from "./LoginPage";
-import HomePage from "./HomePage";
+import LoginPage from "./components/LoginPage";
+import HomePage from "./components/HomePage";
+import RegisterPage from "./components/RegisterPage";
 
 
 const App: React.FC = () => {
@@ -14,8 +15,9 @@ const App: React.FC = () => {
     <BrowserRouter>
       <Switch>
         <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/home" component={HomePage} />
-        <Redirect from="/" to="/login" />
+        <Redirect from="/" to="/home" />
       </Switch>
     </BrowserRouter>
   );
