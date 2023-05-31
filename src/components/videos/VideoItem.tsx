@@ -121,19 +121,14 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
           <div className="d-flex flex-column justify-content-between h-100">
             <div>
               <h3>{currentVideo.title}</h3>
-              <p>Description: {currentVideo.description}</p>
-              <p>Created by: {currentVideo.created_by}</p>
-              <p>Created at: {currentVideo.created_at}</p>
-            </div>
-            <div>
-              <p>Likes: {currentVideo.likes_count}</p>
-              <p>Dislikes: {currentVideo.dislikes_count}</p>
+              <p>Shared by: {currentVideo.created_by}</p>
               <div>
                 {currentVideo.liked ? (
                   <button
                     className="icon-button"
                     onClick={() => handleUnLike(currentVideo.id)}
                   >
+                    {currentVideo.likes_count}
                     <AiFillLike className="like-icon" />
                   </button>
                 ) : (
@@ -141,6 +136,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
                     className="icon-button"
                     onClick={() => handleLike(currentVideo.id)}
                   >
+                    {currentVideo.likes_count}
                     <AiOutlineLike className="like-icon" />
                   </button>
                 )}
@@ -149,6 +145,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
                     className="icon-button"
                     onClick={() => handleUnDislike(currentVideo.id)}
                   >
+                    {currentVideo.dislikes_count}
                     <AiFillDislike className="dislike-icon" />
                   </button>
                 ) : (
@@ -156,10 +153,14 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
                     className="icon-button"
                     onClick={() => handleDislike(currentVideo.id)}
                   >
+                    {currentVideo.dislikes_count}
                     <AiOutlineDislike className="dislike-icon" />
                   </button>
                 )}
               </div>
+              <br/>
+              <p>Description: {currentVideo.description}</p>
+              <p>Created at: {currentVideo.created_at}</p>
             </div>
           </div>
         </Col>
