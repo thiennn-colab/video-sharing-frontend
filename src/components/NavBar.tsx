@@ -1,9 +1,11 @@
 import { Fragment } from "react";
 import { FaYoutube } from "react-icons/fa";
+import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
   const handleLogout = () => {
     localStorage.removeItem("access_token");
+    localStorage.removeItem("email");
   };
 
   return (
@@ -63,9 +65,14 @@ const NavBar = () => {
                 </a>
               </li>
               <li className="nav-item">
+                <a className="nav-link btn btn-light" href="/share-video">
+                  Share a video
+                </a>
+              </li>
+              <li className="nav-item">
                 <a
                   className="nav-link btn btn-light"
-                  href="#"
+                  href="/"
                   onClick={handleLogout}
                 >
                   Logout

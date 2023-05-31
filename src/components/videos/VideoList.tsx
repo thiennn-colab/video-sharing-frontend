@@ -1,40 +1,54 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import "./VideoList.css"
+import VideoItem from "./VideoItem";
+import axios from "axios";
+import { useHistory } from "react-router-dom";
 
 interface Video {
   id: string;
+  video_id: string;
   title: string;
   description: string;
-  createdBy: string;
-  createdAt: string;
-  likes: number;
-  dislikes: number;
+  created_by: string;
+  created_at: string;
+  likes_count: number;
+  dislikes_count: number;
+  liked: boolean;
+  disliked: boolean;
 }
 
-const VideoList: React.FC = () => {
-  const [videos, setVideos] = useState<Video[]>([
-    {
-      id: "07Ezo3tWJpc",
-      title: "Video 1",
-      description: "Description for Video 1",
-      createdBy: "User 1",
-      createdAt: "2022-01-01",
-      likes: 10,
-      dislikes: 2,
-    },
-    {
-      id: "9rNxwnnSMYg",
-      title: "Video 2",
-      description: "Description for Video 2",
-      createdBy: "User 2",
-      createdAt: "2022-02-01",
-      likes: 5,
-      dislikes: 1,
-    },
-    // Add more videos as needed
-  ]);
+const VideoList:React.FC = () => {
+  const [videos, setVideos] = useState<Video[]>([]);
+  const history = useHistory();
 
-  const videosPerPage = 1;
+  useEffect(() => {
+    // Fetch videos from API
+    fetchVideos();
+  }, []);
+
+  const fetchVideos = async () => {
+    try {
+      const response = await axios.get(`http://127.0.0.1:3000/posts?email=${localStorage.getItem("email")}`,);
+      const data = await response.data;
+      setVideos(data.data);
+      console.log(data.data)
+    } catch (error: any) {
+      switch (error.response.status) {
+        case 401: {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("email");
+          history.push("login");
+          break;
+        }
+        default: {
+          console.log(error.response);
+        }
+      }
+    }
+  };
+
+  const videosPerPage = 4;
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = Math.ceil(videos.length / videosPerPage);
   const indexOfLastVideo = currentPage * videosPerPage;
@@ -52,24 +66,6 @@ const VideoList: React.FC = () => {
     setSortOrder(e.target.value as "asc" | "desc");
   };
 
-  const handleLike = (videoId: string) => {
-    setVideos((prevVideos) =>
-      prevVideos.map((video) =>
-        video.id === videoId ? { ...video, likes: video.likes + 1 } : video
-      )
-    );
-  };
-
-  const handleDislike = (videoId: string) => {
-    setVideos((prevVideos) =>
-      prevVideos.map((video) =>
-        video.id === videoId
-          ? { ...video, dislikes: video.dislikes + 1 }
-          : video
-      )
-    );
-  };
-
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -80,8 +76,8 @@ const VideoList: React.FC = () => {
 
   const sortedVideos = [...filteredVideos].sort((a, b) =>
     sortOrder === "asc"
-      ? a.createdAt.localeCompare(b.createdAt)
-      : b.createdAt.localeCompare(a.createdAt)
+      ? a.created_at.localeCompare(b.created_at)
+      : b.created_at.localeCompare(a.created_at)
   );
 
   return (
@@ -113,45 +109,7 @@ const VideoList: React.FC = () => {
       <Row className="mt-4">
         <Col>
           {sortedVideos.map((video) => (
-            <div key={video.id} className="mb-4">
-              <Row>
-                <Col md={7}>
-                  <iframe
-                    width="560"
-                    height="315"
-                    src={`https://www.youtube.com/embed/${video.id}`}
-                    title="YouTube Video"
-                    allowFullScreen
-                  ></iframe>
-                </Col>
-                <Col md={5}>
-                  <div className="d-flex flex-column justify-content-between h-100">
-                    <div>
-                      <h3>{video.title}</h3>
-                      <p>Description: {video.description}</p>
-                      <p>Created by: {video.createdBy}</p>
-                      <p>Created at: {video.createdAt}</p>
-                    </div>
-                    <div>
-                      <p>Likes: {video.likes}</p>
-                      <p>Dislikes: {video.dislikes}</p>
-                      <Button
-                        variant="primary"
-                        onClick={() => handleLike(video.id)}
-                      >
-                        Like
-                      </Button>{" "}
-                      <Button
-                        variant="danger"
-                        onClick={() => handleDislike(video.id)}
-                      >
-                        Dislike
-                      </Button>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-            </div>
+            <VideoItem video={video} key={video.id}/>
           ))}
         </Col>
       </Row>

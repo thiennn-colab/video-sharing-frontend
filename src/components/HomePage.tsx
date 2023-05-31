@@ -9,7 +9,7 @@ const HomePage: React.FC = () => {
     <Fragment>
       <NavBar/>
       <div className="container">
-        <h1>Welcome to the home page</h1>
+        <h1 className="text-center" >Enjoy our funny videos</h1>
         <VideoList/>
       </div>
     </Fragment>
