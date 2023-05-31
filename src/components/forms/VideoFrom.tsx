@@ -76,7 +76,7 @@ const VideoForm: React.FC<VideoFormProps> = ({ onSubmit, error }) => {
 
       <br />
       <Button className="btn-light" type="submit">
-        Submit
+        Save
       </Button>
     </Form>
   );

@@ -1,11 +1,13 @@
 import React, { useState } from "react";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Row, Col, Modal, Button } from "react-bootstrap";
 import "./VideoList.css";
+import "./VideoItem.css";
 import {
   AiOutlineLike,
   AiOutlineDislike,
   AiFillLike,
   AiFillDislike,
+  AiOutlineDelete,
 } from "react-icons/ai";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -25,6 +27,8 @@ interface Video {
 
 const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
   const [currentVideo, setCurrentVideo] = useState(video);
+  const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false);
+  const [isDeleted, setIsDeleted] = useState(false);
   const history = useHistory();
 
   const setVideo = async (videoId: string) => {
@@ -101,7 +105,43 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
     handleDeleteAction(videoId, "undislike");
   };
 
-  return (
+  const handleClickDelete = () => {
+    setShowDeleteConfirmation(true);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await axios.delete(`http://127.0.0.1:3000/posts/${currentVideo.id}`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      });
+      setIsDeleted(true);
+    } catch (error: any) {
+      switch (error.response.status) {
+        case 401: {
+          localStorage.removeItem("access_token");
+          localStorage.removeItem("email");
+          history.push("login");
+          break;
+        }
+        default: {
+          console.log(error.response);
+        }
+      }
+    }
+
+    // Close the confirmation modal
+    setShowDeleteConfirmation(false);
+  };
+
+  const handleCancelDelete = () => {
+    // Cancel delete operation
+    setShowDeleteConfirmation(false);
+  };
+
+
+  return isDeleted ? null : (
     <div
       key={currentVideo.id}
       className="mb-4 shadow p-4"
@@ -118,7 +158,15 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
           ></iframe>
         </Col>
         <Col md={5}>
-          <div className="d-flex flex-column justify-content-between h-100">
+          <div className="d-flex flex-column justify-content-between h-100 position-relative">
+            {localStorage.getItem("email") == currentVideo.created_by ? (
+              <span
+                onClick={handleClickDelete}
+                className="position-absolute bottom-0 end-0 m-3 edit-icon"
+              >
+                <AiOutlineDelete />
+              </span>
+            ) : null}
             <div>
               <h3>{currentVideo.title}</h3>
               <p>Shared by: {currentVideo.created_by}</p>
@@ -158,13 +206,28 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
                   </button>
                 )}
               </div>
-              <br/>
+              <br />
               <p>Description: {currentVideo.description}</p>
               <p>Created at: {currentVideo.created_at}</p>
             </div>
           </div>
         </Col>
       </Row>
+
+      <Modal show={showDeleteConfirmation} onHide={handleCancelDelete}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Video</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this video?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleCancelDelete}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleConfirmDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

@@ -3,13 +3,14 @@
   border: none;
   cursor: pointer;
   transition: transform 0.3s ease;
+  transform: scale(1.2)
 }
 
 .icon-button:hover {
-  transform: scale(1.2);
+  transform: scale(1.5);
 }
 
 .like-icon:hover,
 .dislike-icon:hover {
-  color: blue;
+  color: orange;
 }

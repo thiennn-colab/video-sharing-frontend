@@ -1,0 +1,13 @@
+.edit-icon {
+  cursor: pointer;
+  transform: scale(2);
+}
+
+.edit-icon:hover {
+  color: darkred;
+  transform: scale(3);
+}
+
+.edit-icon:active {
+  opacity: 0.7;
+}
