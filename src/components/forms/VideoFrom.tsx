@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
+import "./VideoFrom.css";
 
 interface VideoFormProps {
   onSubmit: (formData: VideoFormData) => void;
+  error: string;
 }
 
 interface VideoFormData {
@@ -11,7 +13,7 @@ interface VideoFormData {
   description: string;
 }
 
-const VideoForm: React.FC<VideoFormProps> = ({ onSubmit }) => {
+const VideoForm: React.FC<VideoFormProps> = ({ onSubmit, error }) => {
   const [formData, setFormData] = useState<VideoFormData>({
     title: "",
     url: "",
@@ -39,6 +41,7 @@ const VideoForm: React.FC<VideoFormProps> = ({ onSubmit }) => {
   return (
     <Form onSubmit={handleSubmit} className="video-form shadow-sm">
       <Form.Group controlId="title">
+        {error && <Alert variant="danger">{error}</Alert>}
         <Form.Label>Title</Form.Label>
         <Form.Control
           type="text"
@@ -71,7 +74,7 @@ const VideoForm: React.FC<VideoFormProps> = ({ onSubmit }) => {
         />
       </Form.Group>
 
-      <br/>
+      <br />
       <Button className="btn-light" type="submit">
         Submit
       </Button>

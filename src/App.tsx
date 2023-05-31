@@ -9,6 +9,7 @@ import LoginPage from "./components/LoginPage";
 import HomePage from "./components/HomePage";
 import RegisterPage from "./components/RegisterPage";
 import ShareVideoPage from "./components/ShareVideoPage";
+import { Alert } from "react-bootstrap";
 
 
 const App: React.FC = () => {

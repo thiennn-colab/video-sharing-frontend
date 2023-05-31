@@ -1,5 +1,5 @@
-import React, { Fragment } from "react";
-import VideoForm from "./videos/VideoFrom";
+import React, { Fragment, useState } from "react";
+import VideoForm from "./forms/VideoFrom";
 import NavBar from "./NavBar";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
@@ -11,6 +11,7 @@ interface VideoFormData {
 }
 
 const ShareVideoPage: React.FC = () => {
+  const [error, setError] = useState("");
   const history = useHistory();
   const handleFormSubmit = async (formData: VideoFormData) => {
     console.log(formData);
@@ -34,7 +35,7 @@ const ShareVideoPage: React.FC = () => {
           break;
         }
         default: {
-          console.log(error.response);
+          setError(error.response.data.error.messages.join(". "));
         }
       }
     }
@@ -43,12 +44,8 @@ const ShareVideoPage: React.FC = () => {
   return (
     <Fragment>
       <NavBar/>
-      <div className="container">
-        <div className="container">
-          <h1 className="text-center" >Share a youtube video</h1>
-          <VideoForm onSubmit={handleFormSubmit}/>
-          </div>
-      </div>
+      <h1 className="text-center" >Share a youtube video</h1>
+      <VideoForm onSubmit={handleFormSubmit} error={error}/>
     </Fragment>
   );
 };

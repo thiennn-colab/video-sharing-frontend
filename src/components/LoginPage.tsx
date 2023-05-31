@@ -11,6 +11,7 @@ interface FormData {
 
 const LoginPage: React.FC = () => {
   const history = useHistory();
+  const [error, setError] = useState("");
 
   if (localStorage.getItem("access_token")) {
     history.push("/home");
@@ -23,7 +24,7 @@ const LoginPage: React.FC = () => {
       localStorage.setItem("email", response.data.email);
       history.push("/home");
     } catch (error: any) {
-      // console.log(error.response);
+      setError(error.response.data.error.messages.join(". "));
     }
   };
 
@@ -38,7 +39,7 @@ const LoginPage: React.FC = () => {
                 <h3 className="text-center">Login</h3>
               </div>
               <div className="card-body">
-                <LoginForm onSubmit={handleLogin} buttonText="Login" />
+                <LoginForm onSubmit={handleLogin} buttonText="Login" error={error}/>
                 <a
                   href="/register"
                   className="card-link text-right justify-content-end"

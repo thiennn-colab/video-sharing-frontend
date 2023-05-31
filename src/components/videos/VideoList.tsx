@@ -62,9 +62,9 @@ const VideoList:React.FC = () => {
     setSearchTerm(e.target.value);
   };
 
-  const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSortOrder(e.target.value as "asc" | "desc");
-  };
+  // const handleSortChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   setSortOrder(e.target.value as "asc" | "desc");
+  // };
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
@@ -93,7 +93,7 @@ const VideoList:React.FC = () => {
             />
           </Form.Group>
         </Col>
-        <Col md={6}>
+        {/* <Col md={6}>
           <Form.Group>
             <Form.Control
               as="select"
@@ -104,7 +104,7 @@ const VideoList:React.FC = () => {
               <option value="desc">Sort Descending</option>
             </Form.Control>
           </Form.Group>
-        </Col>
+        </Col> */}
       </Row>
       <Row className="mt-4">
         <Col>

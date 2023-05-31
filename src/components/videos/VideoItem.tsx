@@ -32,62 +32,10 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
     setCurrentVideo(response.data.data);
   };
 
-  const handleLike = async (videoId: string) => {
+  const handlePostAction = async (videoId: string, action: string) => {
     try {
-      const response = await axios.post(
-        `http://127.0.0.1:3000/posts/${videoId}/like`,
-        null,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-      setVideo(videoId);
-    } catch (error: any) {
-      switch (error.response.status) {
-        case 401: {
-          localStorage.removeItem("access_token");
-          localStorage.removeItem("email");
-          history.push("login");
-          break;
-        }
-        default: {
-          console.log(error.response);
-        }
-      }
-    }
-  };
-  const handleUnLike = async (videoId: string) => {
-    try {
-      const response = await axios.delete(
-        `http://127.0.0.1:3000/posts/${videoId}/like`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-          },
-        }
-      );
-      setVideo(videoId);
-    } catch (error: any) {
-      switch (error.response.status) {
-        case 401: {
-          localStorage.removeItem("access_token");
-          localStorage.removeItem("email");
-          history.push("login");
-          break;
-        }
-        default: {
-          console.log(error.response);
-        }
-      }
-    }
-  };
-
-  const handleDislike = async (videoId: string) => {
-    try {
-      const response = await axios.post(
-        `http://127.0.0.1:3000/posts/${video.id}/dislike`,
+      await axios.post(
+        `http://127.0.0.1:3000/posts/${videoId}/${action}`,
         null,
         {
           headers: {
@@ -111,10 +59,10 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
     }
   };
 
-  const handleUnDislike = async (videoId: string) => {
+  const handleDeleteAction = async (videoId: string, action: string) => {
     try {
-      const response = await axios.delete(
-        `http://127.0.0.1:3000/posts/${video.id}/dislike`,
+      await axios.delete(
+        `http://127.0.0.1:3000/posts/${videoId}/${action}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -135,6 +83,22 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
         }
       }
     }
+  };
+
+  const handleLike = (videoId: string) => {
+    handlePostAction(videoId, "like");
+  };
+
+  const handleUnLike = (videoId: string) => {
+    handleDeleteAction(videoId, "unlike");
+  };
+
+  const handleDislike = (videoId: string) => {
+    handlePostAction(videoId, "dislike");
+  };
+
+  const handleUnDislike = (videoId: string) => {
+    handleDeleteAction(videoId, "undislike");
   };
 
   return (

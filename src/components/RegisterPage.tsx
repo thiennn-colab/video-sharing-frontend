@@ -10,8 +10,7 @@ interface FormData {
 }
 const RegisterPage: React.FC = () => {
   const history = useHistory();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   if (localStorage.getItem("access_token")) {
     history.push("/home");
@@ -24,7 +23,7 @@ const RegisterPage: React.FC = () => {
       localStorage.setItem("email", response.data.email);
       history.push("/home");
     } catch (error: any) {
-      // console.log(error.response);
+      setError(error.response.data.error.messages.join(". "));
     }
   };
 
@@ -39,7 +38,7 @@ const RegisterPage: React.FC = () => {
                 <h3 className="text-center">Register</h3>
               </div>
               <div className="card-body">
-                <LoginForm onSubmit={handleRegister} buttonText="Register" />
+                <LoginForm onSubmit={handleRegister} buttonText="Register" error={error}/>
                 <a
                   href="/login"
                   className="card-link text-right justify-content-end"

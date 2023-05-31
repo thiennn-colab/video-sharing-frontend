@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { Alert } from "react-bootstrap";
 
 interface FormProps {
   onSubmit: (formData: FormData) => void;
   buttonText: string;
+  error: string;
 }
 
 interface FormData {
@@ -10,7 +12,7 @@ interface FormData {
   password: string;
 }
 
-const LoginForm: React.FC<FormProps> = ({ onSubmit, buttonText }) => {
+const LoginForm: React.FC<FormProps> = ({ onSubmit, buttonText, error }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -22,6 +24,7 @@ const LoginForm: React.FC<FormProps> = ({ onSubmit, buttonText }) => {
 
   return (
     <form onSubmit={handleSubmit}>
+      {error && <Alert variant="danger">{error}</Alert>}
       <div className="form-group">
         <label htmlFor="email">Email</label>
         <input
