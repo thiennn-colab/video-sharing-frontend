@@ -39,7 +39,7 @@ const LoginPage: React.FC = () => {
                 <h3 className="text-center">Login</h3>
               </div>
               <div className="card-body">
-                <LoginForm onSubmit={handleLogin} buttonText="Login" error={error}/>
+                <LoginForm onSubmit={handleLogin} buttonText="Login" error={error} showConfirmPassword={false}/>
                 <a
                   href="/register"
                   className="card-link text-right justify-content-end"

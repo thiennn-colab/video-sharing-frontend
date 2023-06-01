@@ -7,6 +7,7 @@ import LoginForm from "./forms/LoginForm";
 interface FormData {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 const RegisterPage: React.FC = () => {
   const history = useHistory();
@@ -38,7 +39,7 @@ const RegisterPage: React.FC = () => {
                 <h3 className="text-center">Register</h3>
               </div>
               <div className="card-body">
-                <LoginForm onSubmit={handleRegister} buttonText="Register" error={error}/>
+                <LoginForm onSubmit={handleRegister} buttonText="Register" error={error} showConfirmPassword={true}/>
                 <a
                   href="/login"
                   className="card-link text-right justify-content-end"

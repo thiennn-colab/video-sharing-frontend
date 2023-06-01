@@ -5,20 +5,28 @@ interface FormProps {
   onSubmit: (formData: FormData) => void;
   buttonText: string;
   error: string;
+  showConfirmPassword: boolean;
 }
 
 interface FormData {
   email: string;
   password: string;
+  confirmPassword: string;
 }
 
-const LoginForm: React.FC<FormProps> = ({ onSubmit, buttonText, error }) => {
+const LoginForm: React.FC<FormProps> = ({
+  onSubmit,
+  buttonText,
+  error,
+  showConfirmPassword
+}) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const formData: FormData = { email, password };
+    const formData: FormData = { email, password, confirmPassword };
     onSubmit(formData);
   };
 
@@ -47,6 +55,19 @@ const LoginForm: React.FC<FormProps> = ({ onSubmit, buttonText, error }) => {
           placeholder="Password"
         />
       </div>
+      {showConfirmPassword && (
+        <div className="form-group">
+          <label htmlFor="confirmPassword">Confirm Password</label>
+          <input
+            className="form-control"
+            type="password"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            placeholder="Confirm Password"
+          />
+        </div>
+      )}
       <br />
       <button type="submit" className="btn btn-secondary btn-block">
         {buttonText}
