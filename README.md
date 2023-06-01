@@ -25,7 +25,7 @@ This is the Frontend Application of Youtube Video Sharing App which has some fea
 
 
 ### Database Setup
-- run: `rails db:create db:migrate`
+None
 
 ### Running the Application
 
