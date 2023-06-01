@@ -4,6 +4,7 @@ import "./VideoList.css"
 import VideoItem from "./VideoItem";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import env from "../../env";
 
 interface Video {
   id: string;
@@ -29,7 +30,7 @@ const VideoList:React.FC = () => {
 
   const fetchVideos = async () => {
     try {
-      const response = await axios.get(`http://127.0.0.1:3000/posts?email=${localStorage.getItem("email")}`,);
+      const response = await axios.get(`${env.VITE_API_URL}/posts?email=${localStorage.getItem("email")}`);
       const data = await response.data;
       setVideos(data.data);
     } catch (error: any) {

@@ -3,6 +3,7 @@ import VideoForm from "./forms/VideoFrom";
 import NavBar from "./NavBar";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import env from "../env";
 
 interface VideoFormData {
   title: string;
@@ -17,7 +18,7 @@ const ShareVideoPage: React.FC = () => {
     console.log(formData);
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/posts",
+        `${env.VITE_API_URL}/posts`,
         formData,
         {
           headers: {

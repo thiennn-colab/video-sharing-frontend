@@ -11,6 +11,7 @@ import {
 } from "react-icons/ai";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import env from "../../env";
 
 interface Video {
   id: string;
@@ -32,14 +33,14 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
   const history = useHistory();
 
   const setVideo = async (videoId: string) => {
-    const response = await axios.get(`http://127.0.0.1:3000/posts/${videoId}?email=${localStorage.getItem("email")}`);
+    const response = await axios.get(`${env.VITE_API_URL}/posts/${videoId}?email=${localStorage.getItem("email")}`);
     setCurrentVideo(response.data.data);
   };
 
   const handlePostAction = async (videoId: string, action: string) => {
     try {
       await axios.post(
-        `http://127.0.0.1:3000/posts/${videoId}/${action}`,
+        `${env.VITE_API_URL}/posts/${videoId}/${action}`,
         null,
         {
           headers: {
@@ -66,7 +67,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
   const handleDeleteAction = async (videoId: string, action: string) => {
     try {
       await axios.delete(
-        `http://127.0.0.1:3000/posts/${videoId}/${action}`,
+        `${env.VITE_API_URL}/posts/${videoId}/${action}`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -111,7 +112,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`http://127.0.0.1:3000/posts/${currentVideo.id}`, {
+      await axios.delete(`${env.VITE_API_URL}/posts/${currentVideo.id}`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem("access_token")}`,
         },

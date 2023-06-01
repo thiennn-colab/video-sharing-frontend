@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import VideoItem from "./videos/VideoItem";
 import axios from "axios";
 import { Redirect, useHistory, useLocation } from "react-router-dom";
-
+import env from "../env";
 interface Video {
   id: string;
   video_id: string;
@@ -30,7 +30,9 @@ const VideoDetailPage: React.FC = () => {
   const fetchVideos = async () => {
     try {
       const response = await axios.get(
-        `http://127.0.0.1:3000/posts/${video_id}?email=${localStorage.getItem("email")}`
+        `${env.VITE_API_URL}/posts/${video_id}?email=${localStorage.getItem(
+          "email"
+        )}`
       );
       const data = await response.data;
       setVideo(data.data);

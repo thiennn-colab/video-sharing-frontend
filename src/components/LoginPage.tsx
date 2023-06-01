@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 import axios from "axios";
 import NavBar from "./NavBar";
 import LoginForm from "./forms/LoginForm";
+import env from "../env";
 
 interface FormData {
   email: string;
@@ -19,7 +20,7 @@ const LoginPage: React.FC = () => {
 
   const handleLogin = async (formData: FormData) => {
     try {
-      const response = await axios.post("http://127.0.0.1:3000/login", formData);
+      const response = await axios.post(`${env.VITE_API_URL}/login`, formData);
       localStorage.setItem("access_token", response.data.access_token);
       localStorage.setItem("email", response.data.email);
       history.push("/home");
