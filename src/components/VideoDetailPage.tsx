@@ -36,7 +36,7 @@ const VideoDetailPage: React.FC = () => {
       setVideo(data.data);
       console.log(data.data);
     } catch (error: any) {
-      history.push("home");
+      history.push("/home");
     }
   };
 

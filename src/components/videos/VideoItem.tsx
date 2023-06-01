@@ -53,7 +53,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
         case 401: {
           localStorage.removeItem("access_token");
           localStorage.removeItem("email");
-          history.push("login");
+          history.push("/login");
           break;
         }
         default: {
@@ -79,7 +79,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
         case 401: {
           localStorage.removeItem("access_token");
           localStorage.removeItem("email");
-          history.push("login");
+          history.push("/login");
           break;
         }
         default: {
@@ -122,7 +122,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
         case 401: {
           localStorage.removeItem("access_token");
           localStorage.removeItem("email");
-          history.push("login");
+          history.push("/login");
           break;
         }
         default: {

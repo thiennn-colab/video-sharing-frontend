@@ -31,7 +31,7 @@ const ShareVideoPage: React.FC = () => {
         case 401: {
           localStorage.removeItem("access_token");
           localStorage.removeItem("email");
-          history.push("login");
+          history.push("/login");
           break;
         }
         default: {
