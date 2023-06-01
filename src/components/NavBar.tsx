@@ -1,6 +1,5 @@
 import { Fragment } from "react";
 import { FaYoutube } from "react-icons/fa";
-import { useHistory } from "react-router-dom";
 
 const NavBar = () => {
   const handleLogout = () => {
@@ -29,21 +28,11 @@ const NavBar = () => {
         id="navbarNav"
       >
         <ul className="navbar-nav">
-          {/* <li className="nav-item">
+          <li className="nav-item">
             <a className="nav-link" href="/home">
-              Home
+              <b>Home</b>
             </a>
           </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/about">
-              About
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link me-10" href="/contact">
-              Contact
-            </a>
-          </li> */}
           {!localStorage.getItem("access_token") ? (
             <Fragment>
               <li className="nav-item">

@@ -25,7 +25,7 @@ const ShareVideoPage: React.FC = () => {
           }
         }
       );
-      history.push("/home");
+      history.push(`/video/${response.data.data.id}`);
     } catch (error: any) {
       switch (error.response.status){
         case 401: {
