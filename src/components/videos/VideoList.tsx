@@ -32,19 +32,8 @@ const VideoList:React.FC = () => {
       const response = await axios.get(`http://127.0.0.1:3000/posts?email=${localStorage.getItem("email")}`,);
       const data = await response.data;
       setVideos(data.data);
-      console.log(data.data)
     } catch (error: any) {
-      switch (error.response.status) {
-        case 401: {
-          localStorage.removeItem("access_token");
-          localStorage.removeItem("email");
-          history.push("login");
-          break;
-        }
-        default: {
-          console.log(error.response);
-        }
-      }
+      console.log(error.response);
     }
   };
 

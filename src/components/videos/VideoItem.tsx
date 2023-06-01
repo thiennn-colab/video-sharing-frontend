@@ -94,7 +94,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
   };
 
   const handleUnLike = (videoId: string) => {
-    handleDeleteAction(videoId, "unlike");
+    handleDeleteAction(videoId, "like");
   };
 
   const handleDislike = (videoId: string) => {
@@ -102,7 +102,7 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
   };
 
   const handleUnDislike = (videoId: string) => {
-    handleDeleteAction(videoId, "undislike");
+    handleDeleteAction(videoId, "dislike");
   };
 
   const handleClickDelete = () => {
@@ -168,7 +168,14 @@ const VideoItem: React.FC<{ video: Video }> = ({ video }) => {
               </span>
             ) : null}
             <div>
-              <h3>{currentVideo.title}</h3>
+              <h3>
+                <a
+                  href={`/video/${currentVideo.id}`}
+                  style={{ color: "#34568B", textDecoration: "none" }}
+                >
+                  {currentVideo.title}
+                </a>
+              </h3>
               <p>Shared by: {currentVideo.created_by}</p>
               <div>
                 {currentVideo.liked ? (

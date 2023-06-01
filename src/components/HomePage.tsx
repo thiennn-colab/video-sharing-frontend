@@ -3,7 +3,6 @@ import NavBar from "./NavBar";
 import VideoList from "./videos/VideoList";
 
 const HomePage: React.FC = () => {
-  
 
   return (
     <Fragment>

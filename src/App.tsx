@@ -9,7 +9,8 @@ import LoginPage from "./components/LoginPage";
 import HomePage from "./components/HomePage";
 import RegisterPage from "./components/RegisterPage";
 import ShareVideoPage from "./components/ShareVideoPage";
-import { Alert } from "react-bootstrap";
+import Notification from "./components/broadcast/Notification";
+import VideoDetailPage from "./components/VideoDetailPage";
 
 
 const App: React.FC = () => {
@@ -20,8 +21,10 @@ const App: React.FC = () => {
         <Route exact path="/register" component={RegisterPage} />
         <Route exact path="/home" component={HomePage} />
         <Route exact path="/share-video" component={ShareVideoPage} />
+        <Route exact path="/video/:id" component={VideoDetailPage} />
         <Redirect from="/" to="/home" />
       </Switch>
+      <Notification />
     </BrowserRouter>
   );
 };
