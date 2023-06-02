@@ -1,0 +1,33 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-videosharingfrontend-dev-90757-authRole",
+      "UnauthRoleArn": "arn:aws:iam::669447185781:role/amplify-videosharingfrontend-dev-90757-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::669447185781:role/amplify-videosharingfrontend-dev-90757-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-videosharingfrontend-dev-90757-deployment",
+      "UnauthRoleName": "amplify-videosharingfrontend-dev-90757-unauthRole",
+      "StackName": "amplify-videosharingfrontend-dev-90757",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:669447185781:stack/amplify-videosharingfrontend-dev-90757/4b9afda0-00ea-11ee-bdda-02ba6582d322",
+      "AmplifyAppId": "d1r2pmenrrcvw1"
+    },
+    "categories": {
+      "hosting": {
+        "S3AndCloudFront": {}
+      }
+    }
+  },
+  "beurl": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-videosharingfrontend-beurl-170851-authRole",
+      "UnauthRoleArn": "arn:aws:iam::669447185781:role/amplify-videosharingfrontend-beurl-170851-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::669447185781:role/amplify-videosharingfrontend-beurl-170851-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-videosharingfrontend-beurl-170851-deployment",
+      "UnauthRoleName": "amplify-videosharingfrontend-beurl-170851-unauthRole",
+      "StackName": "amplify-videosharingfrontend-beurl-170851",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:669447185781:stack/amplify-videosharingfrontend-beurl-170851/79f48c50-012d-11ee-817d-0a07753823d4",
+      "AmplifyAppId": "d1r2pmenrrcvw1"
+    }
+  }
+}

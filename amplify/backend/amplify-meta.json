@@ -1,0 +1,36 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-videosharingfrontend-dev-90757-authRole",
+      "UnauthRoleArn": "arn:aws:iam::669447185781:role/amplify-videosharingfrontend-dev-90757-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::669447185781:role/amplify-videosharingfrontend-dev-90757-authRole",
+      "Region": "ap-southeast-1",
+      "DeploymentBucketName": "amplify-videosharingfrontend-dev-90757-deployment",
+      "UnauthRoleName": "amplify-videosharingfrontend-dev-90757-unauthRole",
+      "StackName": "amplify-videosharingfrontend-dev-90757",
+      "StackId": "arn:aws:cloudformation:ap-southeast-1:669447185781:stack/amplify-videosharingfrontend-dev-90757/4b9afda0-00ea-11ee-bdda-02ba6582d322",
+      "AmplifyAppId": "d1r2pmenrrcvw1"
+    }
+  },
+  "hosting": {
+    "S3AndCloudFront": {
+      "providerPlugin": "awscloudformation",
+      "service": "S3AndCloudFront",
+      "output": {
+        "CloudFrontSecureURL": "https://d3kpe8s7yq1zj6.cloudfront.net",
+        "S3BucketSecureURL": "https://videosharingfrontend-20230602091028-hostingbucket-dev.s3.amazonaws.com",
+        "CloudFrontOriginAccessIdentity": "E1JLW3III0XK5W",
+        "WebsiteURL": "http://videosharingfrontend-20230602091028-hostingbucket-dev.s3-website-ap-southeast-1.amazonaws.com",
+        "CloudFrontDistributionID": "E3H7KM2OYVDO4Z",
+        "Region": "ap-southeast-1",
+        "HostingBucketName": "videosharingfrontend-20230602091028-hostingbucket-dev",
+        "CloudFrontDomainName": "d3kpe8s7yq1zj6.cloudfront.net"
+      },
+      "lastPushTimeStamp": "2023-06-02T10:22:27.494Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-videosharingfrontend-dev-90757-deployment/amplify-cfn-templates/hosting/template.json",
+        "logicalId": "hostingS3AndCloudFront"
+      }
+    }
+  }
+}
