@@ -3,6 +3,7 @@ import * as ActionCable from "actioncable";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from "react-router-dom";
+import env from "../../env";
 
 const Notification: React.FC = () => {
   const [data, setData] = useState<any>();
@@ -11,7 +12,7 @@ const Notification: React.FC = () => {
 
   useEffect(() => {
     // Create an Action Cable consumer
-    const cable = ActionCable.createConsumer("ws://localhost:3000/cable");
+    const cable = ActionCable.createConsumer(`${env.VITE_API_URL}/cable`);
 
     // Subscribe to the channel
     channel = cable.subscriptions.create("NotificationChannel", {
