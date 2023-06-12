@@ -34,3 +34,6 @@ None
 
 ### How to run the test suite
 none
+
+### for Docker
+- run: `docker-compose up --build`
